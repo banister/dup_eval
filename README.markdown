@@ -29,3 +29,17 @@ Example use:
     o.dup_eval { hello; goodbye }    #=> "Hello! Goodbye!" 
 
 From above, both the methods of the object itself and the binding of the block are available to the block.
+
+    #we can also choose which objects we want to eval the block in (we can have more than one)
+    o1 = Object.new
+    class << o1; ...define methods here... end
+    
+    o2 = Object.new
+    class << o2; ...define methods here... end
+
+    o3 = Object.new
+    class << o3; ...define methods here... end
+
+    o1.dup_eval_with(o1, o2, o3) { o1_method; o2_method; o3_method }
+
+As shown above we can have the block access methods in many objects (as many as we want). The object may also be either Objects, Classes, or Modules.
