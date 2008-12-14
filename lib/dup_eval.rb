@@ -20,7 +20,7 @@ class Object
       }
     }
 
-        # restore needed, or else GC will crash
+    #restore needed, or else GC will crash
     builder.c %{
       void restore_tbls() {
         KLASS_OF(self)->m_tbl = (struct st_table *)rb_iv_get(self, "__orig_m_tbl__");
@@ -45,7 +45,7 @@ class Class
       }
     }
 
-    # restore needed, or else GC will crash
+    #restore needed, or else GC will crash
     builder.c %{
       void restore_tbls() {
         RCLASS(self)->m_tbl = (struct st_table *)rb_iv_get(self, "__orig_m_tbl__");
@@ -61,20 +61,25 @@ class Proc
     end
 end
 
-class Module
-  def dup_eval mod, &blk
-    duped_context = blk._context.dup
-    # make sure the singleton class is in existence
-    class << duped_context; self; end
+class Object
+    def dup_eval(*mods, &blk)
+        #default value is self
+        mods = self if mods.empty?
+        
+        duped_context = blk._context.dup
+        #make sure the singleton class is in existence
+        class << duped_context; self; end
 
-    duped_context.redirect_tbls(blk._context)
+        duped_context.redirect_tbls(blk._context)
 
-    duped_context.gen_extend mod
-    begin
-      m = duped_context.is_a?(Module) ? :class_eval : :instance_eval
-      duped_context.send(m, &blk)
-    ensure
-      duped_context.restore_tbls
+        duped_context.gen_extend(*mods)
+        begin
+            m = duped_context.is_a?(Module) ? :class_eval : :instance_eval
+            duped_context.send(m, &blk)
+        ensure
+            duped_context.restore_tbls
+        end
     end
-  end
+
+    alias_method :dup_eval_with, :dup_eval
 end
