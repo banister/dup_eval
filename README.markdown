@@ -30,7 +30,7 @@ Example use:
 
 From above, both the methods of the object itself and the binding of the block are available to the block.
 
-    #we can also choose which objects we want to eval the block in (we can have more than one)
+    #we can also choose which objects we want to eval the block with respect to (we can have more than one)
     o1 = Object.new
     class << o1; ...define methods here... end
     
