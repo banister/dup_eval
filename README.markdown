@@ -11,3 +11,21 @@ Dup\_eval is a development on work originally by coderrr (http://coderrr.wordpre
 
 NOTE:
 Dup\_eval is still in proof of concept stage, use at own risk! 
+
+Example use:
+===========
+
+    #create our object
+    o = Object.new
+    
+    #give it a method
+    class << o
+        def hello; print "Hello! "; end
+    end
+
+    #create a method in the current binding
+    def goodbye; puts "Goodbye!"; end
+
+    o.dup_eval { hello; goodbye }    #=> "Hello! Goodbye!" 
+
+From above, both the methods of the object itself and the binding of the block are available to the block.
