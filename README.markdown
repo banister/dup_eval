@@ -40,6 +40,9 @@ From above, both the methods of the object itself and the binding of the block a
     o3 = Object.new
     class << o3; ...define methods here... end
 
-    o1.dup_eval_with(o1, o2, o3) { o1_method; o2_method; o3_method }
+    #create a method in the current binding
+    def goodbye; puts "Goodbye!"; end
+
+    o1.dup_eval_with(o1, o2, o3) { o1_method; o2_method; o3_method; goodbye }
 
 As shown above we can have the block access methods in many objects (as many as we want). The objects may also be either Objects, Classes, or Modules.
