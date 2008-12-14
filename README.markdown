@@ -6,7 +6,7 @@ functionality:
 * Ability to mix in Objects/Classes (using Object2module)
 * Thread-safety
 
-Dup\_eval based on coderrr's idea for dupping the binding of a block (http://coderrr.wordpress.com/2008/11/14/making-mixico-thread-safe/)
+Dup\_eval is based on coderrr's idea for dupping the binding of a block (http://coderrr.wordpress.com/2008/11/14/making-mixico-thread-safe/)
 
 NOTE:
 Dup\_eval is still in proof of concept stage, use at own risk! 
