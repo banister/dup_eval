@@ -1,8 +1,8 @@
 Dup\_eval
 ========
 
-This is an alternative to \_why's mix\_eval C extension. It provides identical functionality to mix\_eval as well as the following extra 
-functionality:
+This is an alternative to \_why's mix\_eval C extension. It provides identical functionality to mix\_eval as well as the following extra functionality:
+
 * Ability to mix in Objects/Classes (using Object2module)
 * Thread-safety
 
